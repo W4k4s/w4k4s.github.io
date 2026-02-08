@@ -26,8 +26,8 @@ Personal portfolio & profile page. Built with vanilla HTML/CSS/JS. Dark tech aes
 | Project | Description | Stack |
 |---------|-------------|-------|
 | [aimejor.com](https://aimejor.com) | AI automation agency | Next.js, n8n, AI |
-| [Wisma](https://github.com/W4k4s/wisma) | Voice dictation + AI formatting | Tauri, Rust, Whisper |
-| TCG Collection | AI video pipeline + SEO | Grok Imagine, ElevenLabs |
+| Wisma | Voice dictation + AI formatting (exclusive for clients) | Tauri, Rust, Whisper |
+| [TCG Collection](https://tcg-collection.com) | AI video pipeline + SEO | Grok Imagine, ElevenLabs |
 | OpenClaw Workspace | Personal AI assistant setup | OpenClaw, Claude |
 
 ---
