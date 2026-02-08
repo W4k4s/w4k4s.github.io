@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4k4s — Isma Moreno</title>
+    <meta name="description" content="Sysadmin by day, AI tinkerer by night. Building aimejor.com and other cool stuff.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --blue: #0066ff;
+            --teal: #00d4aa;
+            --orange: #ff6b35;
+            --green: #22c55e;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0,102,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,102,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--blue);
+            box-shadow: 0 0 30px rgba(0,102,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .avatar:hover {
+            border-color: var(--teal);
+            box-shadow: 0 0 40px rgba(0,212,170,0.4);
+            transform: scale(1.05);
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--bg);
+            border: 2px solid var(--teal);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 span.accent { color: var(--blue); }
+        .hero h1 span.teal { color: var(--teal); }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+        }
+
+        .typing {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--teal);
+            font-size: 0.95rem;
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Cards grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,102,255,0.1);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: rgba(0,102,255,0.15);
+            color: var(--blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-top: 0.75rem;
+            margin-right: 0.3rem;
+        }
+
+        .card .tag.teal {
+            background: rgba(0,212,170,0.15);
+            color: var(--teal);
+        }
+
+        .card .tag.orange {
+            background: rgba(255,107,53,0.15);
+            color: var(--orange);
+        }
+
+        /* Links */
+        a {
+            color: var(--blue);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover { color: var(--teal); }
+
+        /* Botardin section */
+        .botardin-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .botardin-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--teal);
+            flex-shrink: 0;
+        }
+
+        .botardin-text h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .botardin-text p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .botardin-quote {
+            font-style: italic;
+            color: var(--teal);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Terminal block */
+        .terminal {
+            background: #0d0d14;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .terminal .prompt { color: var(--teal); }
+        .terminal .cmd { color: var(--text); }
+        .terminal .output { color: var(--text-dim); }
+        .terminal .comment { color: #555; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .botardin-section { flex-direction: column; text-align: center; }
+            .status-bar { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Hero -->
+        <div class="hero">
+            <div class="avatar-container">
+                <img src="assets/isma.png" alt="Isma" class="avatar" id="avatar">
+                <div class="avatar-badge">⚡</div>
+            </div>
+            <h1><span class="accent">W4</span>k4<span class="teal">s</span></h1>
+            <p class="tagline">Sysadmin by day · AI tinkerer by night</p>
+            <p class="typing" id="typing"></p>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>Building things</span>
+            </div>
+            <div class="status-item">
+                <span>📍 Spain</span>
+            </div>
+            <div class="status-item">
+                <span>☀️ Renewable energy sector</span>
+            </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="terminal">
+            <span class="comment">#!/bin/bash</span><br>
+            <span class="prompt">w4k4s@dev:~$ </span><span class="cmd">whoami</span><br>
+            <span class="output">Isma Moreno — IT sysadmin turned AI automation builder</span><br>
+            <span class="output">Currently automating everything that doesn't fight back</span><br><br>
+            <span class="prompt">w4k4s@dev:~$ </span><span class="cmd">cat /etc/mission</span><br>
+            <span class="output">Make businesses smarter with AI, one workflow at a time</span><br><br>
+            <span class="prompt">w4k4s@dev:~$ </span><span class="cmd">ls ~/superpowers/</span><br>
+            <span class="output">breaking-prod-on-friday.sh&nbsp;&nbsp;fixing-it-before-anyone-notices.sh</span><br>
+            <span class="output">turning-500-tickets-into-0.py&nbsp;&nbsp;making-robots-do-my-job.ai</span>
+        </div>
+
+        <!-- Projects -->
+        <h2 style="margin: 2.5rem 0 1rem; font-family: 'JetBrains Mono', monospace;">// Proyectos</h2>
+        <div class="grid">
+            <a href="https://aimejor.com" class="card" style="text-decoration:none; color:inherit;">
+                <h3>🤖 aimejor.com</h3>
+                <p>Agencia de automatización con IA. Transformamos negocios con flujos inteligentes, chatbots y soluciones a medida.</p>
+                <span class="tag">Next.js</span>
+                <span class="tag teal">n8n</span>
+                <span class="tag orange">AI</span>
+            </a>
+            <a href="https://github.com/W4k4s/wisma" class="card" style="text-decoration:none; color:inherit;">
+                <h3>🎙️ Wisma</h3>
+                <p>Voice dictation app con IA. Graba, transcribe con Whisper y formatea con LLMs. Desktop app multiplataforma.</p>
+                <span class="tag">Tauri</span>
+                <span class="tag teal">Rust</span>
+                <span class="tag orange">Whisper</span>
+            </a>
+            <div class="card">
+                <h3>🎬 TCG Collection</h3>
+                <p>Pipeline de vídeos generados con IA para tienda de cartas coleccionables. SEO de página 48 → página 1.</p>
+                <span class="tag">Grok Imagine</span>
+                <span class="tag teal">ElevenLabs</span>
+                <span class="tag orange">SEO</span>
+            </div>
+            <div class="card">
+                <h3>⚙️ OpenClaw Workspace</h3>
+                <p>Mi setup de asistente personal con IA. Skills, automatizaciones, memoria persistente. Funciona 24/7.</p>
+                <span class="tag">OpenClaw</span>
+                <span class="tag teal">Claude</span>
+                <span class="tag orange">Automation</span>
+            </div>
+        </div>
+
+        <!-- Stack -->
+        <h2 style="margin: 2.5rem 0 1rem; font-family: 'JetBrains Mono', monospace;">// Stack</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>💻 Sistemas</h3>
+                <p>Linux, Windows Server, Azure AD, gestión de usuarios, firewalls, redes. El pan de cada día.</p>
+            </div>
+            <div class="card">
+                <h3>🧠 IA & Automatización</h3>
+                <p>Claude, GPT, Whisper, ElevenLabs, n8n, agentes autónomos. Si se puede automatizar, se automatiza.</p>
+            </div>
+            <div class="card">
+                <h3>🌐 Desarrollo</h3>
+                <p>TypeScript, React, Next.js, Tauri, Rust, Python. Full-stack cuando toca.</p>
+            </div>
+        </div>
+
+        <!-- Botardin -->
+        <div class="botardin-section">
+            <img src="assets/botardin.png" alt="Botardin" class="botardin-avatar">
+            <div class="botardin-text">
+                <h3>🤖 Botardin <span class="tag teal" style="margin:0">AI Assistant</span></h3>
+                <p>Mi asistente personal con IA. Gestiona mi agenda, revisa emails, genera contenido, automatiza tareas y hasta contesta WhatsApps. Funciona 24/7 en un portátil con OpenClaw + Claude.</p>
+                <p class="botardin-quote">"Soy un robot con opiniones. Y mis opiniones son que deberías automatizar eso."</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://github.com/W4k4s">github</a>
+                <a href="https://aimejor.com">aimejor.com</a>
+            </div>
+            <p>Built with ☕ and AI — w4k4s © 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Typing effect
+        const phrases = [
+            "automating everything since 2026...",
+            "if it's repetitive, it's getting automated",
+            "sysadmin.exe has evolved into ai-builder.py",
+            "500 tickets → 0 tickets (true story)",
+            "my AI assistant has an AI assistant",
+            "the robots work for me now 🤖",
+        ];
+        
+        const el = document.getElementById('typing');
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+        
+        function type() {
+            const phrase = phrases[phraseIndex];
+            
+            if (!deleting) {
+                el.textContent = phrase.substring(0, charIndex++);
+                if (charIndex > phrase.length) {
+                    deleting = true;
+                    setTimeout(type, 2000);
+                    return;
+                }
+            } else {
+                el.textContent = phrase.substring(0, charIndex--);
+                if (charIndex < 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    charIndex = 0;
+                    setTimeout(type, 500);
+                    return;
+                }
+            }
+            setTimeout(type, deleting ? 30 : 60);
+        }
+        
+        type();
+
+        // Easter egg: click avatar
+        let clicks = 0;
+        document.getElementById('avatar').addEventListener('click', () => {
+            clicks++;
+            if (clicks === 3) {
+                document.querySelector('.avatar-badge').textContent = '🔥';
+                document.querySelector('.tagline').textContent = 'MODO BESTIA ACTIVADO';
+                document.querySelector('.avatar').style.borderColor = '#ff6b35';
+                document.querySelector('.avatar').style.boxShadow = '0 0 50px rgba(255,107,53,0.5)';
+                setTimeout(() => {
+                    document.querySelector('.avatar-badge').textContent = '⚡';
+                    document.querySelector('.tagline').textContent = 'Sysadmin by day · AI tinkerer by night';
+                    document.querySelector('.avatar').style.borderColor = '';
+                    document.querySelector('.avatar').style.boxShadow = '';
+                    clicks = 0;
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
