@@ -1,9 +1,35 @@
-# w4k4s.github.io
-About w4k4s
-I am starting my evolution in the world of systems and cybersecurity. 
+<div align="center">
 
-I will try to contribute as much as I can for all those people who want to learn like me!
+# ⚡ W4k4s
 
-I hope that my progress can be the progress of others!
+**Sysadmin by day · AI tinkerer by night**
 
-***Welcome and enjoy!***
+🔗 **[w4k4s.github.io](https://w4k4s.github.io)**
+
+</div>
+
+---
+
+Personal portfolio & profile page. Built with vanilla HTML/CSS/JS. Dark tech aesthetic.
+
+### Features
+
+- 🎨 Dark theme with animated grid background
+- ⌨️ Typing animation with rotating dev quotes
+- 💻 Fake terminal with humorous commands
+- 📦 Project cards with tech tags
+- 🤖 Botardin (AI assistant) section
+- 🔥 Easter egg: click the avatar 3 times
+
+### Projects
+
+| Project | Description | Stack |
+|---------|-------------|-------|
+| [aimejor.com](https://aimejor.com) | AI automation agency | Next.js, n8n, AI |
+| [Wisma](https://github.com/W4k4s/wisma) | Voice dictation + AI formatting | Tauri, Rust, Whisper |
+| TCG Collection | AI video pipeline + SEO | Grok Imagine, ElevenLabs |
+| OpenClaw Workspace | Personal AI assistant setup | OpenClaw, Claude |
+
+---
+
+*Built with ☕ and AI — w4k4s © 2026*
